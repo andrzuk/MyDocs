@@ -22,6 +22,7 @@ class Category_Controller extends Controller
 		if ($data)
 		{
 			$access = $user_status ? $user_status <= $data[0]['permission'] : $data[0]['permission'] == FREE;
+			$access &= $this->app->get_acl()->allowed(USER);
 
 			if ($access)
 			{

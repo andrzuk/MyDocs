@@ -24,6 +24,7 @@ class Page_Controller extends Controller
 
 			$access = $user_status ? $user_status <= $permission : $permission == FREE;
 			$access &= $visible;
+			$access &= $this->app->get_acl()->allowed(USER);
 
 			$this->app->get_page()->set_path(array_reverse($this->make_path($data['category_id'])));
 
