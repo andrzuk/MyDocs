@@ -8,9 +8,9 @@ nav > div > ul.navbar-nav > li.nav-selected { background-color: #ececec; }
 nav > div > ul.navbar-nav > li.nav-selected > a { color: #c00; }
 
 ul.categories { margin: 0px 0px 0px 10px; padding: 0px; }
-ul.categories > li { list-style-image: url('http://in-met.url.ph/img/pointers/list_item.png'); }
+ul.categories > li { list-style-image: url('http://afasystem.info.pl/img/pointers/list_item.png'); }
 ul.categories > li:hover { color: #c00; }
-ul.categories > li.category-selected { list-style-image: url('http://in-met.url.ph/img/pointers/list_item_active.png'); }
+ul.categories > li.category-selected { list-style-image: url('http://afasystem.info.pl/img/pointers/list_item_active.png'); }
 ul.categories > li.category-selected > a { color: #ff300a; }
 
 div.page-content > div.row > div.categories { margin-top: -10px; border-right: 1px dotted #aaa; }
@@ -50,4 +50,4 @@ p.sup { border-top: 1px solid #ddd; font-size: 0.8em; padding-top: 10px; }
     bottom: 18px;
     right: 10px;
 }
-i.glyphspace { padding-right: 10px; }
+i.glyphspace { padding: 1px; }

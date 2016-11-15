@@ -34,7 +34,7 @@ class FoundBuilder extends Builder
 	{
 		$main_text = NULL;
 
-		$main_text .= '<div class="panel panel-default">';
+		$main_text .= '<div class="panel panel-primary">';
 		$main_text .= '<div class="panel-heading">';
 
 		$main_text .= '<span class="FormIcon">';

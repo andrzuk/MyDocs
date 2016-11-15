@@ -75,7 +75,7 @@ class ListBuilder extends Builder
 						
 		$paginator->init($base_link, $this->params['show_page'], $this->params['page_counter'], $this->params['page_band']);
 		
-		$main_text .= '<div class="panel panel-default">';
+		$main_text .= '<div class="panel panel-primary">';
 		$main_text .= '<div class="panel-heading">';
 
 		$main_text .= '<span class="FormIcon">';
@@ -105,7 +105,8 @@ class ListBuilder extends Builder
 
 		$main_text .= '</div>';
 
-		$main_text .= '<table class="table">';
+		$main_text .= '<div class="table-responsive">';
+		$main_text .= '<table class="table-bordered table-striped" width="100%">';
 		
 		// jeśli wprowadzono filtr:
 		
@@ -239,6 +240,7 @@ class ListBuilder extends Builder
 		}
 
 		$main_text .= '</table>';
+		$main_text .= '</div>';
 		$main_text .= '<div class="panel-footer">';
 		$main_text .= $paginator->show();
 		$main_text .= '</div>';

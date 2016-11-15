@@ -49,7 +49,7 @@ class Dialog
 				break;
 		}
 
-		$main_dialog_body .= '<div class="panel panel-'. $alert_type .' center" style="width: 400px;">';
+		$main_dialog_body .= '<div class="panel panel-primary center" style="width: 400px;">';
 
 		$main_dialog_body .= '<div class="panel-heading">';
 		$main_dialog_body .= '<h3 class="panel-title">';

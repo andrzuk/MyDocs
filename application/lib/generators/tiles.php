@@ -41,7 +41,7 @@ class TilesBuilder extends Builder
 						
 		$paginator->init($base_link, $this->params['show_page'], $this->params['page_counter'], $this->params['page_band']);
 
-		$main_text .= '<div class="panel panel-default">';
+		$main_text .= '<div class="panel panel-primary">';
 		$main_text .= '<div class="panel-heading">';
 
 		$main_text .= '<span class="FormIcon">';
