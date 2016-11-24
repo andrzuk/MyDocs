@@ -3,7 +3,7 @@
 $main_layout_content = '
 
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 
   <head>
     <meta charset="utf-8">
@@ -16,20 +16,26 @@ $main_layout_content = '
     <meta name="googlebot" content="index, follow, all" />
     <meta name="distribution" content="global" />
     <title>'.$this->get_metadata('main_title').'</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
     <link href="css/grid.css" rel="stylesheet">
     <link href="css/prettify.css" rel="stylesheet">
     <link href="css/default.css" rel="stylesheet">
     <link href="gallery/logo/favicon.ico" rel="icon">
     <link href="gallery/logo/favicon.ico" rel="shortcut icon"> 
     <base href="'.$this->get_metadata('base_domain').'" target="_self" />
-    <script src="js/default.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/chart/Chart.js"></script>
+    <script src="js/chart/Chart.HorizontalBar.js"></script>
+    <script src="js/chart/Ajax.js"></script>
+    <script src="js/'.$this->get_layout().'.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,\'script\',\'//www.google-analytics.com/analytics.js\',\'ga\');
-      ga(\'create\', \'UA-16941734-21\', \'auto\');
+      ga(\'create\', \'UA-16941734-4\', \'auto\');
       ga(\'send\', \'pageview\');
     </script>
     <!--[if lt IE 9]>
@@ -54,24 +60,15 @@ $main_layout_content = '
       '.$this->get_path().'
     </div>
 
-    '.$this->get_navbar().'
-
     <div class="page-content">
-      '.$this->get_options().'
-      <div class="row">
-        <div class="col-md-12 content">
-          '.$this->get_content().'
-        </div>
-      </div>
+      '.$this->get_options().
+        $this->get_content().'
     </div>
 
     <div class="page-footer">
       '.$this->get_footer().'
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	
   </body>
   
 </html>

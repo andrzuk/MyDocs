@@ -24,7 +24,12 @@ $main_layout_content = '
     <link href="gallery/logo/favicon.ico" rel="icon">
     <link href="gallery/logo/favicon.ico" rel="shortcut icon"> 
     <base href="'.$this->get_metadata('base_domain').'" target="_self" />
-    <script src="js/default.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/chart/Chart.js"></script>
+    <script src="js/chart/Chart.HorizontalBar.js"></script>
+    <script src="js/chart/Ajax.js"></script>
+    <script src="js/'.$this->get_layout().'.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -43,9 +48,9 @@ $main_layout_content = '
     <div class="page-header">
       <form action="index.php?route=search" class="navbar-form navbar-right" role="search" method="post">
         <div class="form-group">
-          <input type="text" name="text-search" class="form-control" placeholder="Wyszukaj artykuł">
+          <input type="text" name="text-search" class="form-control">
         </div>
-        <button type="submit" name="button-search" class="btn btn-info"><i class="glyphicon glyphicon-search"></i> Szukaj</button>
+        <button type="submit" name="button-search" class="btn btn-default">Szukaj</button>
       </form>
       '.$this->get_links().'
       <a href="index.php"><img src="'.$this->get_logo().'" class="img-logo" alt="logo" /></a>
@@ -54,12 +59,6 @@ $main_layout_content = '
     <div class="page-path">
       '.$this->get_path().'
     </div>
-
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container">
-        '.$this->get_navbar().'
-      </div>
-    </nav>
 
     <div class="page-content">
       <div class="row">
@@ -76,8 +75,6 @@ $main_layout_content = '
       '.$this->get_footer().'
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/prettify.js"></script>
     <script>
       !function ($) {

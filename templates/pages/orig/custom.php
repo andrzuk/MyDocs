@@ -24,7 +24,9 @@ $main_layout_content = '
     <link href="gallery/logo/favicon.ico" rel="icon">
     <link href="gallery/logo/favicon.ico" rel="shortcut icon"> 
     <base href="'.$this->get_metadata('base_domain').'" target="_self" />
-    <script src="js/default.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/'.$this->get_layout().'.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -51,12 +53,6 @@ $main_layout_content = '
       <a href="index.php"><img src="'.$this->get_logo().'" class="img-logo" alt="logo" /></a>
     </div>
 
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container">
-        '.$this->get_navbar().'
-      </div>
-    </nav>
-
     <div class="page-content">
       '.$this->get_content().'
     </div>
@@ -65,8 +61,6 @@ $main_layout_content = '
       '.$this->get_footer().'
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/prettify.js"></script>
     <script>
       !function ($) {

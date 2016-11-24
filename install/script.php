@@ -28,6 +28,9 @@ $sql_script = array(
 			'DROP TABLE IF EXISTS `user_messages`;',
 			'DROP TABLE IF EXISTS `user_roles`;',
 			'DROP TABLE IF EXISTS `visitors`;',
+			'DROP TABLE IF EXISTS `stat_main`;',
+			'DROP TABLE IF EXISTS `stat_cat`;',
+			'DROP TABLE IF EXISTS `stat_ip`;',
 		),
 	),
 	array(
@@ -163,6 +166,40 @@ $sql_script = array(
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 			",
 			"
+				CREATE TABLE `stat_cat` (
+				  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				  `date` date NOT NULL,
+				  `category_id` int(10) unsigned NOT NULL,
+				  `counter` int(10) unsigned NOT NULL,
+				  PRIMARY KEY (`id`),
+				  KEY `date` (`date`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			",
+			"
+				CREATE TABLE `stat_ip` (
+				  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				  `date` date NOT NULL,
+				  `ip` varchar(15) CHARACTER SET latin2 NOT NULL,
+				  `counter` int(10) unsigned NOT NULL,
+				  PRIMARY KEY (`id`),
+				  KEY `date` (`date`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			",
+			"
+				CREATE TABLE `stat_main` (
+				  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				  `date` date NOT NULL,
+				  `start` int(10) unsigned NOT NULL,
+				  `contact` int(10) unsigned NOT NULL,
+				  `admin` int(10) unsigned NOT NULL,
+				  `login` int(10) unsigned NOT NULL,
+				  `reset` int(10) unsigned NOT NULL,
+				  `statistics` int(10) unsigned NOT NULL,
+				  PRIMARY KEY (`id`),
+				  KEY `date` (`date`)
+				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			",
+			"
 				CREATE TABLE IF NOT EXISTS `users` (
 				  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 				  `user_login` varchar(32) NOT NULL,
@@ -226,17 +263,18 @@ $sql_script = array(
 				(2, 'config', 'Konfiguracja', 'config'),
 				(3, 'template', 'Szablon strony', 'template'),
 				(4, 'style', 'Styl strony', 'style'),
-				(5, 'users', 'Użytkownicy', 'users'),
-				(6, 'ACL', 'Access Control List', 'roles'),
-				(7, 'visitors', 'Odwiedziny', 'visitors'),
-				(8, 'gallery', 'Galeria', 'images'),
-				(9, 'categories', 'Kategorie', 'categories'),
-				(10, 'pages', 'Strony', 'pages'),
-				(11, 'sites', 'Opisy', 'sites'),
-				(12, 'messages', 'Wiadomości', 'messages'),
-				(13, 'searches', 'Wyszukiwania', 'searches'),
-				(14, 'logins', 'Logowania', 'logins'),
-				(15, 'excludes', 'Wykluczenia adresów', 'excludes');
+				(5, 'script', 'Skrypt strony', 'script'),
+				(6, 'users', 'Użytkownicy', 'users'),
+				(7, 'ACL', 'Access Control List', 'roles'),
+				(8, 'visitors', 'Odwiedziny', 'visitors'),
+				(9, 'gallery', 'Galeria', 'images'),
+				(10, 'categories', 'Kategorie', 'categories'),
+				(11, 'pages', 'Strony', 'pages'),
+				(12, 'sites', 'Opisy', 'sites'),
+				(13, 'messages', 'Wiadomości', 'messages'),
+				(14, 'searches', 'Wyszukiwania', 'searches'),
+				(15, 'logins', 'Logowania', 'logins'),
+				(16, 'excludes', 'Wykluczenia adresów', 'excludes');
 			",
 			"
 				INSERT INTO `configuration` (`id`, `key_name`, `key_value`, `meaning`, `field_type`, `active`, `modified`) VALUES
@@ -262,15 +300,18 @@ $sql_script = array(
 				(20, 'page_pointer_band', '4', 'liczebność (połowa) paska ze wskaźnikami stron w pasku nawigacji', 1, 1, :save_time),
 				(21, 'send_new_message_report', 'true', 'wysyłanie e-mailem raportów do admina o pojawieniu się nowej wiadomości', 3, 1, :save_time),
 				(22, 'email_sender_name', 'Mail Manager', 'nazwa konta e-mailowego serwisu', 1, 1, :save_time),
-				(23, 'email_sender_address', :email_sender_address, 'adres konta e-mailowego serwisu', 1, 1, :save_time),
-				(24, 'email_admin_address', :email_admin_address, 'adres e-mail administratora serwisu', 1, 1, :save_time),
-				(25, 'email_report_address', :email_report_address, 'adres e-mail odbiorcy raportów', 1, 1, :save_time),
-				(26, 'email_report_subject', 'Raport serwisu', 'temat maila raportującego zdarzenie', 1, 1, :save_time),
-				(27, 'email_report_body_1', 'Raport o zdarzeniu w serwisie', 'treść maila rapotującego - część przed zmiennymi', 2, 1, :save_time),
-				(28, 'email_report_body_2', '(brak)', 'treść maila rapotującego - część za zmiennymi', 2, 1, :save_time),
-				(29, 'email_remindpwd_subject', 'Nowe hasło do konta', 'temat generowanego maila z nowym hasłem', 1, 1, :save_time),
-				(30, 'email_remindpwd_body_1', 'Na Twoją prośbę przesyłamy Ci nowe hasło logowania.', 'treść generowanego maila z nowym hasłem - przed hasłem', 2, 1, :save_time),
-				(31, 'email_remindpwd_body_2', 'Zaloguj się, a następnie zmień hasło na swoje własne.', 'treść generowanego maila z nowym hasłem - za hasłem', 2, 1, :save_time);
+				(23, 'email_host', 'mail.afasystem.info.pl', 'host wysyłania maili', 1, 1, '2016-03-30 15:36:02'),
+				(24, 'email_port', '587', 'port smtp', 1, 1, '2016-03-30 15:37:03'),
+				(25, 'email_password', 'D3d8nRgNyNNk', 'hasło konta mailingowego', 1, 1, '2016-03-30 15:40:37'),
+				(26, 'email_sender_address', :email_sender_address, 'adres konta e-mailowego serwisu', 1, 1, :save_time),
+				(27, 'email_admin_address', :email_admin_address, 'adres e-mail administratora serwisu', 1, 1, :save_time),
+				(28, 'email_report_address', :email_report_address, 'adres e-mail odbiorcy raportów', 1, 1, :save_time),
+				(29, 'email_report_subject', 'Raport serwisu', 'temat maila raportującego zdarzenie', 1, 1, :save_time),
+				(30, 'email_report_body_1', 'Raport o zdarzeniu w serwisie', 'treść maila rapotującego - część przed zmiennymi', 2, 1, :save_time),
+				(31, 'email_report_body_2', '(brak)', 'treść maila rapotującego - część za zmiennymi', 2, 1, :save_time),
+				(32, 'email_remindpwd_subject', 'Nowe hasło do konta', 'temat generowanego maila z nowym hasłem', 1, 1, :save_time),
+				(33, 'email_remindpwd_body_1', 'Na Twoją prośbę przesyłamy Ci nowe hasło logowania.', 'treść generowanego maila z nowym hasłem - przed hasłem', 2, 1, :save_time),
+				(34, 'email_remindpwd_body_2', 'Zaloguj się, a następnie zmień hasło na swoje własne.', 'treść generowanego maila z nowym hasłem - za hasłem', 2, 1, :save_time);
 			",
 			"
 				INSERT INTO `pages` (`id`, `main_page`, `system_page`, `category_id`, `title`, `contents`, `description`, `author_id`, `visible`, `modified`) VALUES
@@ -299,7 +340,8 @@ $sql_script = array(
 				(12, 1, 12, 1),
 				(13, 1, 13, 1),
 				(14, 1, 14, 1),
-				(15, 1, 15, 1);
+				(15, 1, 15, 1),
+				(16, 1, 16, 1);
 			",
 		),
 	),
